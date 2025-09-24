@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Users, Menu, X } from "lucide-react";
+import { Users, Menu, Cloud, Shield, Brain, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { MegaMenu, SalesforceIcon } from "@/components/ui/megamenu";
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,6 +14,39 @@ export default function Navigation() {
     }
     setIsOpen(false);
   };
+
+  const specializationItems = [
+    {
+      title: "Cloud Computing",
+      description: "AWS, Azure, GCP expertise for scalable infrastructure and modern cloud solutions",
+      icon: Cloud,
+      link: "#services"
+    },
+    {
+      title: "Cyber Security",
+      description: "Security professionals for threat analysis, penetration testing, and compliance",
+      icon: Shield,
+      link: "#services"
+    },
+    {
+      title: "AI/ML",
+      description: "Machine learning engineers and data scientists for intelligent automation",
+      icon: Brain,
+      link: "#services"
+    },
+    {
+      title: "Salesforce",
+      description: "Certified developers and admins for CRM customization and implementation",
+      icon: SalesforceIcon,
+      link: "#services"
+    },
+    {
+      title: "Data Analytics/Engineering",
+      description: "Data pipeline architects and analysts for business intelligence solutions",
+      icon: BarChart3,
+      link: "#services"
+    }
+  ];
 
   const navItems = [
     { label: "Services", id: "services" },
@@ -34,6 +68,12 @@ export default function Navigation() {
           </div>
           
           <div className="hidden md:flex items-center space-x-8">
+            <MegaMenu 
+              title="Our Specializations" 
+              items={specializationItems}
+              className="relative"
+              onItemClick={scrollToSection}
+            />
             {navItems.map((item) => (
               <button
                 key={item.id}
@@ -70,6 +110,29 @@ export default function Navigation() {
             </SheetTrigger>
             <SheetContent side="right" className="w-[300px] sm:w-[400px]">
               <div className="flex flex-col space-y-4 mt-8">
+                <div className="pb-4 border-b border-border">
+                  <h3 className="text-lg font-semibold text-foreground mb-3">Our Specializations</h3>
+                  <div className="space-y-3">
+                    {specializationItems.map((item, index) => {
+                      const IconComponent = item.icon;
+                      return (
+                        <button
+                          key={index}
+                          className="flex items-center space-x-3 p-2 rounded-lg hover:bg-muted/50 transition-colors w-full text-left"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            scrollToSection('services');
+                          }}
+                        >
+                          <IconComponent className="h-5 w-5 text-primary flex-shrink-0" />
+                          <span className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                            {item.title}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
                 {navItems.map((item) => (
                   <button
                     key={item.id}
