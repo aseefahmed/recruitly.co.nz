@@ -65,6 +65,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           errors: error.errors 
         });
       } else {
+        console.error("Error creating job seeker inquiry:", error);
         res.status(500).json({ message: "Failed to submit inquiry" });
       }
     }
@@ -86,6 +87,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           errors: error.errors 
         });
       } else {
+        console.error("Error creating job seeker inquiry:", error);
         res.status(500).json({ message: "Failed to submit inquiry" });
       }
     }
